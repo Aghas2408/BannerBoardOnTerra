@@ -1,0 +1,10 @@
+.banner-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  border-radius: 20px;
+  border: 1px solid #fff;
+  backdrop-filter: blur(5px);
+  background: rgba(217, 217, 217, 0.07);
+}
