@@ -1,5 +1,4 @@
 .main-container {
-  position: relative;
   overflow: hidden;
   background: #0d115a;
 
@@ -49,6 +48,14 @@
 
 .first-banners-inner {
   width: calc(100% - 340px);
+  display: flex;
+  row-gap: 20px;
+  flex-wrap: wrap;
+  column-gap: 20px;
+
+  .banner-box {
+    height: 256px;
+  }
 
   .top-banner {
     width: 100%;
@@ -63,36 +70,119 @@
   }
 }
 
-.inner-banner-box {
+.first-banner {
+  width: 100%;
+  max-width: 344px;
+}
+
+.second-banner {
+  width: 100%;
+  max-width: 1072px;
+}
+
+.middle-banner {
+  width: 100%;
+  max-width: 708px;
+}
+
+.upload-image-box {
+  max-width: 620px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  .upload-information {
+    color: #1e1e1e;
+    font-weight: 400;
+    position: absolute;
+    display: flex;
+    row-gap: 5px;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+    .upload-title {
+      font-size: 20px;
+      line-height: 20px;
+    }
+    .upload-subtitle {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 14px;
+    }
+    .icon-upload {
+    }
+  }
+
+  .upload-img {
+    position: relative;
+    width: 100%;
+    height: 191px;
+    border-radius: 20px;
+    border: 1px dashed #0d115b;
+    background: rgba(13, 17, 91, 0.05);
+
+    &::file-selector-button {
+      display: none;
+    }
+  }
+
+  .text-information {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .btn-box {
+    width: 100%;
+    display: flex;
+    margin-top: 37px;
+    column-gap: 15px;
+    align-items: center;
+    justify-content: flex-end;
+
+    button {
+      transition: ease-in 0.2s;
+      cursor: pointer;
+      width: 120px;
+      padding: 12px 35px;
+      border-radius: 8px;
+    }
+
+    .first-btn {
+      color: #111671;
+      border: 1px solid #111671;
+
+      &:hover {
+        color: white;
+        background: #111671;
+        border: 1px solid transparent;
+      }
+    }
+
+    .second-btn {
+      border: 1px solid transparent;
+      color: white;
+      border-radius: 8px;
+      background: #111671;
+
+      &:hover {
+        color: #111671;
+        border: 1px solid #111671;
+        background-color: white;
+      }
+    }
+  }
+}
+
+.upload-information-box {
   width: 100%;
   display: flex;
-  row-gap: 20px;
-  margin-top: 20px;
-  column-gap: 20px;
-  justify-content: space-between;
-
-  &:first-child {
-    margin-top: 0;
-  }
-
-  .banner-box {
-    height: 256px;
-  }
-
-  .first-banner {
-    width: 100%;
-    max-width: 344px;
-  }
-
-  .second-banner {
-    width: 100%;
-    max-width: 1072px;
-  }
-
-  .middle-banner {
-    width: 100%;
-    max-width: 708px;
-  }
+  align-items: center;
+  justify-content: center;
 }
 
 @media screen and (max-width: 1120px) {
