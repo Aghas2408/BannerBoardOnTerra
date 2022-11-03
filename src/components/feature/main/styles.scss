@@ -63,6 +63,7 @@
 }
 
 .second-banners-inner {
+  height: 256px;
   min-width: 320px;
 
   .right-section-banner {
@@ -145,7 +146,7 @@
     justify-content: flex-end;
 
     button {
-      transition: ease-in 0.2s;
+      transition: all ease-out 0.3s;
       cursor: pointer;
       width: 120px;
       padding: 12px 35px;
@@ -160,19 +161,6 @@
         color: white;
         background: #111671;
         border: 1px solid transparent;
-      }
-    }
-
-    .second-btn {
-      border: 1px solid transparent;
-      color: white;
-      border-radius: 8px;
-      background: #111671;
-
-      &:hover {
-        color: #111671;
-        border: 1px solid #111671;
-        background-color: white;
       }
     }
   }

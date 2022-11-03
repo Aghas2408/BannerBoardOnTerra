@@ -39,35 +39,36 @@ export default function Main() {
   return (
     <div className="main-container">
       <Modal>
-        <div className="upload-image-box">
-          <div className="upload-information-box">
-            <div className="upload-information">
-              <img src={uploadImg} alt="#" className="icon-upload" />
-              <p className="upload-title">Choose a file or drag it here</p>
-              <p className="upload-subtitle">Max image size: 2MB</p>
+        {openModal ? (
+          <div className="upload-image-box">
+            <div className="upload-information-box">
+              <div className="upload-information">
+                <img src={uploadImg} alt="#" className="icon-upload" />
+                <p className="upload-title">Choose a file or drag it here</p>
+                <p className="upload-subtitle">Max image size: 2MB</p>
+              </div>
+              <input
+                className="upload-img"
+                multiple
+                type="file"
+                name="myImage"
+                onChange={handleCreateImageTag}
+              />
             </div>
-            <input
-              className="upload-img"
-              multiple
-              type="file"
-              name="myImage"
-              onChange={handleCreateImageTag}
-            />
+            <div className="text-information">
+              <p>Recommended image size: 310x1080</p>
+              <p>Acceptable formats: JPG, PNG, SVG</p>
+            </div>
+            <div className="btn-box">
+              <button
+                className="first-btn"
+                onClick={() => setOpenModal(!openModal)}
+              >
+                CANCEL
+              </button>
+            </div>
           </div>
-          <div className="text-information">
-            <p>Recommended image size: 310x1080</p>
-            <p>Acceptable formats: JPG, PNG, SVG</p>
-          </div>
-          <div className="btn-box">
-            <button
-              className="first-btn"
-              onClick={() => setOpenModal(!openModal)}
-            >
-              CANCEL
-            </button>
-            <button className="second-btn">ADD</button>
-          </div>
-        </div>
+        ) : null}
       </Modal>
       <Container className="banners-box">
         <div className="first-banners-inner">
