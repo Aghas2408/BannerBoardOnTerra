@@ -1,3 +1,4 @@
+import { useWallet, WalletStatus } from "@terra-money/wallet-provider";
 import Button from "../Button";
 import Container from "../Container";
 import { walletIcon } from "../../../assets/icons";
@@ -5,6 +6,15 @@ import { walletIcon } from "../../../assets/icons";
 import "./styles.scss";
 
 export default function Header() {
+  const {
+    status,
+    availableConnectTypes,
+    connect,
+    disconnect,
+  } = useWallet();
+
+  const isWalletConnected = status === WalletStatus.WALLET_NOT_CONNECTED;
+
   return (
     <header className="header-container">
       <Container>
@@ -23,9 +33,10 @@ export default function Header() {
         </div>
         <Button
           iconSrc={walletIcon}
-          buttonLabel="Connect"
+          buttonLabel = {isWalletConnected ? "Connect" : "Disconnect"}
           buttonStyle="connect-btn"
           labelStyle="connect-labelStyle"
+          onClickButton = {isWalletConnected ? () => connect(availableConnectTypes[3]) : () => disconnect()}
         />
       </Container>
     </header>
