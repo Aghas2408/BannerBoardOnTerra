@@ -63,7 +63,6 @@
 }
 
 .second-banners-inner {
-  height: 256px;
   min-width: 320px;
 
   .right-section-banner {
@@ -125,8 +124,9 @@
     border: 1px dashed #0d115b;
     background: rgba(13, 17, 91, 0.05);
 
-    &::file-selector-button {
-      display: none;
+    input {
+      opacity: 0;
+      visibility: hidden;
     }
   }
 

@@ -47,13 +47,16 @@ export default function Main() {
                 <p className="upload-title">Choose a file or drag it here</p>
                 <p className="upload-subtitle">Max image size: 2MB</p>
               </div>
-              <input
-                className="upload-img"
-                multiple
-                type="file"
-                name="myImage"
-                onChange={handleCreateImageTag}
-              />
+              <label htmlFor="upload-img-label" className="upload-img">
+                <input
+                  id="upload-img-label"
+                  multiple
+                  type="file"
+                  name="myImage"
+                  title="asdsdaasd"
+                  onChange={handleCreateImageTag}
+                />
+              </label>
             </div>
             <div className="text-information">
               <p>Recommended image size: 310x1080</p>
@@ -93,7 +96,7 @@ export default function Main() {
           })}
         </div>
         <div className="second-banners-inner">
-          <Banner className="right-section-banner" />
+          <Banner className="right-section-banner" children={<></>} />
         </div>
       </Container>
     </div>

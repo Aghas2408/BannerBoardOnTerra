@@ -24,6 +24,7 @@ export default function Header() {
       })
       .then((data) => {
         const { value } = data;
+        localStorage.setItem("value", value);
         setVisitsWebsite(value);
       });
   };
