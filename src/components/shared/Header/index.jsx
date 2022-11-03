@@ -30,6 +30,8 @@ export default function Header() {
   };
 
   useEffect(() => {
+    const loaclStorageValue = localStorage.getItem("value");
+    if (loaclStorageValue) setVisitsWebsite(loaclStorageValue);
     getWebsiteVisits();
   }, []);
 
