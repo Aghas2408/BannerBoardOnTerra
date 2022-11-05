@@ -1,3 +1,4 @@
 import uploadImg from "./upload.png";
+import emptyImg from "./empty-img.png";
 
-export { uploadImg };
+export { emptyImg, uploadImg };

@@ -2,10 +2,13 @@ import { useState, useContext } from "react";
 import Modal from "../../shared/Modal";
 import Banner from "../../shared/Banner";
 import Container from "../../shared/Container";
-import { uploadImg } from "../../../assets/images";
+import { emptyImg, uploadImg } from "../../../assets/images";
 import { ModalContext } from "../../../context/modalContext";
 
 import "./styles.scss";
+import ProgressBar from "../../shared/ProgressBar";
+import { closeX } from "../../../assets/icons";
+import Button from "../../shared/Button";
 
 const initialBannersData = [
   { bannerClassName: "top-banner" },
@@ -23,6 +26,7 @@ export default function Main() {
   const [selectedBannerIndex, setSelectedBannerIndex] = useState();
 
   const handleCreateImageTag = (e) => {
+    console.log(e);
     const bannerFields = bannersData[selectedBannerIndex];
     bannerFields.file = e.target.files[0];
 
@@ -38,7 +42,7 @@ export default function Main() {
 
   return (
     <div className="main-container">
-      <Modal>
+      <Modal modalTitle="Add a Banner">
         {openModal ? (
           <div className="upload-image-box">
             <div className="upload-information-box">
@@ -62,13 +66,38 @@ export default function Main() {
               <p>Recommended image size: 310x1080</p>
               <p>Acceptable formats: JPG, PNG, SVG</p>
             </div>
+            <div className="progress-container">
+              <img src={emptyImg} alt="#" />
+              <ProgressBar progresstext={90} />
+              <div>
+                <img src={closeX} alt="#" />
+              </div>
+            </div>
+            <div className="choosen-radios-box">
+              <p className="choosen-title">
+                Choose amount of time you want your banner to be displayed
+              </p>
+              <div className="choosen-radios">
+                <label htmlFor="time12">
+                  <input type="radio" id="time12" name="selectTime" />
+                  12h
+                </label>
+                <label htmlFor="time24">
+                  <input type="radio" id="time24" name="selectTime" />
+                  24h
+                </label>
+              </div>
+            </div>
             <div className="btn-box">
-              <button
-                className="first-btn"
-                onClick={() => setOpenModal(!openModal)}
-              >
-                CANCEL
-              </button>
+              <Button
+                buttonLabel="Cancel"
+                buttonStyle="first-btn"
+                onClickButton={() => setOpenModal(!openModal)}
+              />
+              <Button
+                buttonStyle="first-btn second-btn"
+                buttonLabel={`Add for ${"$105"}`}
+              />
             </div>
           </div>
         ) : null}

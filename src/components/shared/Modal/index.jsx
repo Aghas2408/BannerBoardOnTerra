@@ -3,7 +3,7 @@ import { ModalContext } from "../../../context/modalContext";
 
 import "./styles.scss";
 
-export default function Modal({ children }) {
+export default function Modal({ children, modalTitle }) {
   const childrenRef = useRef(null);
   const { openModal, setOpenModal } = useContext(ModalContext);
 
@@ -20,6 +20,7 @@ export default function Modal({ children }) {
       opacity: openModal ? 1 : 0,
       height: openModal ? modalHeight : 0,
       padding: openModal ? "20px 10px" : 0,
+      transform: openModal ? "scale(1)" : "scale(0)",
       visibility: openModal ? "visible" : "hidden",
     };
   };
@@ -29,7 +30,7 @@ export default function Modal({ children }) {
     if (typeof children === "object" && openModal) {
       // this 50 related parent duble padding
       setModalHeight(children.clientHeight + 50);
-    }
+    } else return;
   }, [children]);
 
   useEffect(() => {
@@ -48,15 +49,15 @@ export default function Modal({ children }) {
       onClick={() => setOpenModal(!openModal)}
       className="modal-container"
       style={{
-        visibility: openModal ? "visible" : "hidden",
         top: scrollPosition,
+        visibility: openModal ? "visible" : "hidden",
       }}
     >
       <div className="modal-box" onClick={(e) => e.stopPropagation()}>
-        <p className="moadl-title">Add a Banner</p>
+        <p className="moadl-title">{modalTitle}</p>
         <div
-          className="children-inner"
           ref={childrenRef}
+          className="children-inner"
           style={returnModalStyle()}
         >
           {children}
