@@ -1,14 +1,15 @@
 import { useState, useContext } from "react";
 import Modal from "../../shared/Modal";
 import Banner from "../../shared/Banner";
+import Button from "../../shared/Button";
+import { closeX } from "../../../assets/icons";
 import Container from "../../shared/Container";
+import ProgressBar from "../../shared/ProgressBar";
 import { emptyImg, uploadImg } from "../../../assets/images";
 import { ModalContext } from "../../../context/modalContext";
 
 import "./styles.scss";
-import ProgressBar from "../../shared/ProgressBar";
-import { closeX } from "../../../assets/icons";
-import Button from "../../shared/Button";
+import Timer from "../../shared/Timer";
 
 const initialBannersData = [
   { bannerClassName: "top-banner" },
@@ -22,22 +23,41 @@ const initialBannersData = [
 
 export default function Main() {
   const { openModal, setOpenModal } = useContext(ModalContext);
+
+  const [futureDate, setFutureDate] = useState();
+  const [uploadFile, setUploadFile] = useState();
   const [bannersData, setBannersData] = useState(initialBannersData);
   const [selectedBannerIndex, setSelectedBannerIndex] = useState();
 
-  const handleCreateImageTag = (e) => {
-    console.log(e);
-    const bannerFields = bannersData[selectedBannerIndex];
-    bannerFields.file = e.target.files[0];
-
+  const configureBannersData = (bannerField) => {
     const inputsDataNextState = [
       ...bannersData.slice(0, selectedBannerIndex),
-      {
-        ...bannerFields,
-      },
+      bannerField,
       ...bannersData.slice(selectedBannerIndex + 1, bannersData.length),
     ];
     setBannersData(inputsDataNextState);
+  };
+
+  const addTimeTimer = (e) => {
+    const hours = e.target.id;
+    let currentTime = new Date().getTime();
+    let updatedTIme = new Date(currentTime + hours * 60 * 60 * 1000);
+    setFutureDate(updatedTIme);
+  };
+
+  const addToBanner = () => {
+    const bannerField = bannersData[selectedBannerIndex];
+    bannerField.file = uploadFile;
+    configureBannersData(bannerField);
+  };
+
+  const removeFileToBanner = () => {
+    const bannerField = bannersData[selectedBannerIndex];
+    const isBannerField = bannerField && typeof bannerField === "object";
+    if (!isBannerField) return;
+    setUploadFile("");
+    bannerField.file = "";
+    configureBannersData(bannerField);
   };
 
   return (
@@ -52,13 +72,16 @@ export default function Main() {
                 <p className="upload-subtitle">Max image size: 2MB</p>
               </div>
               <label htmlFor="upload-img-label" className="upload-img">
+                {uploadFile && (
+                  <img src={URL.createObjectURL(uploadFile)} alt="" />
+                )}
                 <input
                   id="upload-img-label"
                   multiple
                   type="file"
                   name="myImage"
                   title="asdsdaasd"
-                  onChange={handleCreateImageTag}
+                  onChange={(e) => setUploadFile(e.target.files[0])}
                 />
               </label>
             </div>
@@ -69,7 +92,7 @@ export default function Main() {
             <div className="progress-container">
               <img src={emptyImg} alt="#" />
               <ProgressBar progresstext={90} />
-              <div>
+              <div onClick={removeFileToBanner}>
                 <img src={closeX} alt="#" />
               </div>
             </div>
@@ -78,12 +101,12 @@ export default function Main() {
                 Choose amount of time you want your banner to be displayed
               </p>
               <div className="choosen-radios">
-                <label htmlFor="time12">
-                  <input type="radio" id="time12" name="selectTime" />
+                <label htmlFor="time12" onChange={addTimeTimer}>
+                  <input type="radio" id="12" name="selectTime" />
                   12h
                 </label>
-                <label htmlFor="time24">
-                  <input type="radio" id="time24" name="selectTime" />
+                <label htmlFor="time24" onChange={addTimeTimer}>
+                  <input type="radio" id="24" name="selectTime" />
                   24h
                 </label>
               </div>
@@ -97,6 +120,7 @@ export default function Main() {
               <Button
                 buttonStyle="first-btn second-btn"
                 buttonLabel={`Add for ${"$105"}`}
+                onClickButton={() => addToBanner()}
               />
             </div>
           </div>
@@ -125,7 +149,10 @@ export default function Main() {
           })}
         </div>
         <div className="second-banners-inner">
-          <Banner className="right-section-banner" children={<></>} />
+          <Banner
+            className="right-section-banner"
+            children={<Timer futureDate={futureDate} />}
+          />
         </div>
       </Container>
     </div>
