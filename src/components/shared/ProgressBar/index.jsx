@@ -1,7 +1,7 @@
 import "./styles.scss";
 
-export default function ProgressBar({ progresstext = 0 }) {
-  const progressPresent = progresstext;
+export default function ProgressBar({ progressText = 0 }) {
+  const progressPresent = progressText;
   return (
     <div className="progress-box">
       <div className="progress-bar-inner">
@@ -10,7 +10,7 @@ export default function ProgressBar({ progresstext = 0 }) {
           className="progress-bar"
         />
       </div>
-      <span className="progress-text">{`${progresstext}%`}</span>
+      <span className="progress-text">{`${progressText}%`}</span>
     </div>
   );
 }

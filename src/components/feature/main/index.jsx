@@ -26,6 +26,7 @@ export default function Main() {
 
   const [futureDate, setFutureDate] = useState();
   const [uploadFile, setUploadFile] = useState();
+  const [progressPercent, setProgressPercent] = useState(0);
   const [bannersData, setBannersData] = useState(initialBannersData);
   const [selectedBannerIndex, setSelectedBannerIndex] = useState();
 
@@ -58,6 +59,16 @@ export default function Main() {
     setUploadFile("");
     bannerField.file = "";
     configureBannersData(bannerField);
+    setProgressPercent(0);
+  };
+
+  const handleUploadFile = (e) => {
+    const startTime = performance.now();
+    setUploadFile(e.target.files[0]);
+    const endTime = performance.now() + 1;
+    const generalTime = endTime - startTime;
+    const finishedProgressTime = (generalTime * 100) / new Date().getTime();
+    setProgressPercent(Math.ceil(finishedProgressTime) * 100);
   };
 
   return (
@@ -81,7 +92,7 @@ export default function Main() {
                   type="file"
                   name="myImage"
                   title="asdsdaasd"
-                  onChange={(e) => setUploadFile(e.target.files[0])}
+                  onChange={handleUploadFile}
                 />
               </label>
             </div>
@@ -91,7 +102,7 @@ export default function Main() {
             </div>
             <div className="progress-container">
               <img src={emptyImg} alt="#" />
-              <ProgressBar progresstext={90} />
+              <ProgressBar progressText={progressPercent} />
               <div onClick={removeFileToBanner}>
                 <img src={closeX} alt="#" />
               </div>
