@@ -1,4 +1,5 @@
 import { useState, useContext } from "react";
+import Timer from "../../shared/Timer";
 import Modal from "../../shared/Modal";
 import Banner from "../../shared/Banner";
 import Button from "../../shared/Button";
@@ -9,7 +10,6 @@ import { emptyImg, uploadImg } from "../../../assets/images";
 import { ModalContext } from "../../../context/modalContext";
 
 import "./styles.scss";
-import Timer from "../../shared/Timer";
 
 const initialBannersData = [
   { bannerClassName: "top-banner" },

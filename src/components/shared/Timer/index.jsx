@@ -33,10 +33,12 @@ export default function Timer({ futureDate }) {
         {hours}
         <span>Hours</span>
       </p>
+      <p className="timer-doth">:</p>
       <p>
         {minutes}
         <span>Minutes</span>
       </p>
+      <p className="timer-doth">:</p>
       <p>
         {seconds}
         <span>Seconds</span>

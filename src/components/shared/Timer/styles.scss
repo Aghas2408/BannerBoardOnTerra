@@ -1,19 +1,33 @@
 .timer-box {
   width: 100%;
   padding: 10px;
-  margin-top: 25px;
   text-align: center;
   display: flex;
   column-gap: 20px;
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.1);
+  background: #ffffff;
 
   p {
-    color: white;
-    font-weight: bold;
+    color: #0d115a;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 39px;
     display: flex;
-    font-size: 20px;
     flex-direction: column;
+
+    span {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 17px;
+    }
+  }
+
+  .timer-doth {
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 39px;
+    color: #0d115a;
+    margin-bottom: 15px;
   }
 }
