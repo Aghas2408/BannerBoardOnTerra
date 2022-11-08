@@ -63,12 +63,15 @@ export default function Main() {
   };
 
   const handleUploadFile = (e) => {
-    const startTime = performance.now();
-    setUploadFile(e.target.files[0]);
-    const endTime = performance.now() + 1;
-    const generalTime = endTime - startTime;
-    const finishedProgressTime = (generalTime * 100) / new Date().getTime();
-    setProgressPercent(Math.ceil(finishedProgressTime) * 100);
+    setProgressPercent(0);
+    setTimeout(() => {
+      const startTime = performance.now();
+      setUploadFile(e.target.files[0]);
+      const endTime = performance.now() + 1;
+      const generalTime = endTime - startTime;
+      const finishedProgressTime = (generalTime * 100) / new Date().getTime();
+      setProgressPercent(Math.ceil(finishedProgressTime) * 100);
+    }, 500);
   };
 
   return (
