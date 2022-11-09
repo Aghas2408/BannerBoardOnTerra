@@ -5,11 +5,16 @@ import { ModalContext } from "../../../context/modalContext";
 
 import "./styles.scss";
 
-export default function Banner({ className = "", onBannerClick, children }) {
+export default function Banner({
+  className = "",
+  children,
+  onBannerClick,
+  onBannerButtonClick,
+}) {
   const { setOpenModal } = useContext(ModalContext);
 
   return (
-    <div className={`banner-box ${className}`}>
+    <div className={`banner-box ${className}`} onClick={onBannerClick}>
       {children ? (
         children
       ) : (
@@ -17,8 +22,8 @@ export default function Banner({ className = "", onBannerClick, children }) {
           buttonLabel="Add Banner"
           iconSrc={plusBtn}
           onClickButton={(event) => {
-            onBannerClick(event);
             setOpenModal(true);
+            onBannerButtonClick(event);
           }}
         />
       )}

@@ -24,7 +24,14 @@ export default function Timer({ futureDate }) {
   }, [deadline]);
 
   useEffect(() => {
-    setDeadline(futureDate);
+    if (futureDate === String(0)) {
+      setHours(0);
+      setMinutes(0);
+      setSeconds(0);
+      setDeadline(0);
+    } else {
+      setDeadline(futureDate);
+    }
   }, [futureDate]);
 
   return (

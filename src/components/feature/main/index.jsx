@@ -71,6 +71,18 @@ export default function Main() {
     setBannerSize(parrentOffsetInfo);
   };
 
+  const selectedBannerGetSize = (event, index) => {
+    const parrentOffsetInfo = {
+      offsetHeight: event ? event.target.offsetHeight : 0,
+      offsetWidth: event ? event.target.offsetWidth : 0,
+    };
+    const bannerField = bannersData[index];
+    bannerField.size = parrentOffsetInfo;
+    setSelectedBannerIndex(index);
+    setBannerSize(parrentOffsetInfo);
+    setSelectedOneBanner(bannerField);
+  };
+
   const handleUploadFile = (e) => {
     setProgressPercent(0);
     setTimeout(() => {
@@ -159,7 +171,10 @@ export default function Main() {
                 className={`${bannerClassName} ${
                   selectedBannerIndex === index ? "active-banner" : ""
                 }`}
-                onBannerClick={(event) => handleGetBannerSize(event, index)}
+                onBannerButtonClick={(event) =>
+                  handleGetBannerSize(event, index)
+                }
+                onBannerClick={(event) => selectedBannerGetSize(event, index)}
                 children={
                   includeFile && (
                     <img
