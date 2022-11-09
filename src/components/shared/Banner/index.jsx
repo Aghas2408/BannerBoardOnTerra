@@ -16,8 +16,8 @@ export default function Banner({ className = "", onBannerClick, children }) {
         <Button
           buttonLabel="Add Banner"
           iconSrc={plusBtn}
-          onClickButton={() => {
-            onBannerClick();
+          onClickButton={(event) => {
+            onBannerClick(event);
             setOpenModal(true);
           }}
         />

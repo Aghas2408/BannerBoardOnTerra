@@ -55,7 +55,13 @@
   justify-content: space-between;
 
   .banner-box {
+    transition: all 0.5s;
     height: 344px;
+  }
+
+  .active-banner {
+    transition: all 0.5s;
+    box-shadow: 0px 0px 10px 1px #b199ad;
   }
 
   .top-banner {
@@ -68,7 +74,42 @@
 
   .right-section-banner {
     height: 100%;
-    align-items: flex-start;
+    row-gap: 20px;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    .timer-box-hidden {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      border-radius: 20px;
+      transition: all 0.5s;
+      overflow: hidden;
+      opacity: 0;
+      height: 0;
+      width: 100%;
+      visibility: hidden;
+    }
+
+    .timer-box-show {
+      transition: all 0.5s;
+      height: 150px;
+      opacity: 1;
+      visibility: visible;
+      background: #2221729e;
+      box-shadow: inset 0px 3px 20px 12px #372f72;
+    }
+
+    .banners-size-info {
+      padding: 20px 10px;
+
+      p {
+        color: #fff;
+        font-size: 17px;
+        font-weight: 400;
+      }
+    }
   }
 }
 

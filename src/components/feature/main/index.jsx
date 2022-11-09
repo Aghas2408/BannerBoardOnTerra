@@ -8,27 +8,20 @@ import Container from "../../shared/Container";
 import ProgressBar from "../../shared/ProgressBar";
 import { emptyImg, uploadImg } from "../../../assets/images";
 import { ModalContext } from "../../../context/modalContext";
+import { INITIAL_BANNERS_DATA } from "../../../constants/bannersData";
 
 import "./styles.scss";
-
-const initialBannersData = [
-  { bannerClassName: "top-banner" },
-  { bannerClassName: "first-banner" },
-  { bannerClassName: "second-banner" },
-  { bannerClassName: "middle-banner" },
-  { bannerClassName: "middle-banner" },
-  { bannerClassName: "second-banner" },
-  { bannerClassName: "first-banner" },
-];
 
 export default function Main() {
   const { openModal, setOpenModal } = useContext(ModalContext);
 
   const [futureDate, setFutureDate] = useState();
   const [uploadFile, setUploadFile] = useState();
+  const [bannerSize, setBannerSize] = useState();
   const [progressPercent, setProgressPercent] = useState(0);
-  const [bannersData, setBannersData] = useState(initialBannersData);
+  const [selectedOneBanner, setSelectedOneBanner] = useState();
   const [selectedBannerIndex, setSelectedBannerIndex] = useState();
+  const [bannersData, setBannersData] = useState(INITIAL_BANNERS_DATA);
 
   const configureBannersData = (bannerField) => {
     const inputsDataNextState = [
@@ -49,6 +42,9 @@ export default function Main() {
   const addToBanner = () => {
     const bannerField = bannersData[selectedBannerIndex];
     bannerField.file = uploadFile;
+    bannerField.timer = futureDate;
+    bannerField.size = bannerSize;
+    setSelectedOneBanner(bannerField);
     configureBannersData(bannerField);
   };
 
@@ -60,6 +56,19 @@ export default function Main() {
     bannerField.file = "";
     configureBannersData(bannerField);
     setProgressPercent(0);
+  };
+
+  const handleGetBannerSize = (event, index) => {
+    const parrentOffsetInfo = {
+      offsetHeight: event
+        ? event.target.offsetParent.offsetParent.offsetHeight
+        : 0,
+      offsetWidth: event
+        ? event.target.offsetParent.offsetParent.offsetWidth
+        : 0,
+    };
+    setSelectedBannerIndex(index);
+    setBannerSize(parrentOffsetInfo);
   };
 
   const handleUploadFile = (e) => {
@@ -134,7 +143,7 @@ export default function Main() {
               <Button
                 buttonStyle="first-btn second-btn"
                 buttonLabel={`Add for ${"$105"}`}
-                onClickButton={() => addToBanner()}
+                onClickButton={addToBanner}
               />
             </div>
           </div>
@@ -147,8 +156,10 @@ export default function Main() {
             return (
               <Banner
                 key={index}
-                className={bannerClassName}
-                onBannerClick={() => setSelectedBannerIndex(index)}
+                className={`${bannerClassName} ${
+                  selectedBannerIndex === index ? "active-banner" : ""
+                }`}
+                onBannerClick={(event) => handleGetBannerSize(event, index)}
                 children={
                   includeFile && (
                     <img
@@ -165,7 +176,27 @@ export default function Main() {
         <div className="second-banners-inner">
           <Banner
             className="right-section-banner"
-            children={<Timer futureDate={futureDate} />}
+            children={
+              <div
+                className={`timer-box-hidden ${
+                  selectedOneBanner ? "timer-box-show" : ""
+                } `}
+              >
+                <Timer
+                  futureDate={selectedOneBanner && selectedOneBanner.timer}
+                />
+                <div className="banners-size-info">
+                  <p>
+                    width:{" "}
+                    {selectedOneBanner && selectedOneBanner.size.offsetWidth}px
+                  </p>
+                  <p>
+                    height:{" "}
+                    {selectedOneBanner && selectedOneBanner.size.offsetHeight}px
+                  </p>
+                </div>
+              </div>
+            }
           />
         </div>
       </Container>

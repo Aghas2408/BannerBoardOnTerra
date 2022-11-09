@@ -10,7 +10,9 @@ export default function Button({
   return (
     <div className={`button-box ${buttonStyle}`}>
       <button onClick={onClickButton}>
-        {iconSrc && <img type="image" src={`${iconSrc}`} alt="image not found" />}
+        {iconSrc && (
+          <img type="image" src={`${iconSrc}`} alt="image not found" />
+        )}
         <p className={labelStyle}>{buttonLabel}</p>
       </button>
     </div>
